@@ -7,7 +7,7 @@ cursor = conn.cursor()
 
 # Set up the page config and title
 st.set_page_config(page_title="SwaadSaga - A journey through the taste of India 🍛", layout="centered")
-st.title("🍛 Food Recommendations 🍛")
+st.title("🍛 SwaadSaga - A journey through the taste of India 🍛")
 
 # Sidebar filter options
 st.sidebar.header("Filter Your Preferences")
