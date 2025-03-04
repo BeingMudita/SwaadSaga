@@ -6,8 +6,8 @@ conn = sqlite3.connect('food_recommendations.db')
 cursor = conn.cursor()
 
 # Set up the page config and title
-st.set_page_config(page_title="Food Recommendations", layout="centered")
-st.title("🍽️ Food Recommendations")
+st.set_page_config(page_title="SwaadSaga - A journey through the taste of India 🍛", layout="centered")
+st.title("🍛 Food Recommendations 🍛")
 
 # Sidebar filter options
 st.sidebar.header("Filter Your Preferences")
