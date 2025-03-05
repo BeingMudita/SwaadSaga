@@ -1,21 +1,19 @@
 import streamlit as st
 import sqlite3
+import os
+db_path = os.path.join(os.path.dirname(__file__), 'food_recommendations.db')
+conn = sqlite3.connect(db_path)
 
-# Connect to SQLite database
-conn = sqlite3.connect('food_recommendations.db')
 cursor = conn.cursor()
 
-# Set up the page config and title
 st.set_page_config(page_title="SwaadSaga - A journey through the taste of India 🍛", layout="centered")
 st.title("🍛 SwaadSaga - A journey through the taste of India 🍛")
 
-# Sidebar filter options
 st.sidebar.header("Filter Your Preferences")
 cuisine = st.sidebar.selectbox("Choose a cuisine:", options=["Any"] + [row[0] for row in cursor.execute("SELECT DISTINCT cuisine FROM food")])
 diet = st.sidebar.selectbox("Choose your diet preference:", options=["Any"] + [row[0] for row in cursor.execute("SELECT DISTINCT diet FROM food")])
 course = st.sidebar.selectbox("Choose the course:", options=["Any"] + [row[0] for row in cursor.execute("SELECT DISTINCT course FROM food")])
 
-# Fetch data based on user input
 query = "SELECT * FROM food WHERE 1=1"
 params = []
 
@@ -29,13 +27,12 @@ if course != "Any":
     query += " AND course = ?"
     params.append(course)
 
-# Display recommendations on button click
+
 if st.button("Get Recommendations"):
     cursor.execute(query, tuple(params))
     items = cursor.fetchall()
-    st.session_state["items"] = items  # Store items in session state
+    st.session_state["items"] = items  
 
-# Show the food recommendations
 items = st.session_state.get("items", [])
 
 if items:
